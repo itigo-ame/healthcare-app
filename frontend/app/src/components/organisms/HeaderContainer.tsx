@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import DropdownMenu from "./DropdownMenu";
 
+//もう使っているところはないはず！
+
 const HeaderContainer: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
