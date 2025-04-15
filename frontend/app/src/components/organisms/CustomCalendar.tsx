@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Calendar, { CalendarProps } from "react-calendar";
+import Calendar, { CalendarProps, CalendarType } from "react-calendar"; // ← CalendarType を追加
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 
-// カレンダーのスタイル
+type Value = CalendarProps["value"];
+
 const StyledCalendar = styled(Calendar)`
   width: 100%;
   max-width: 100%;
