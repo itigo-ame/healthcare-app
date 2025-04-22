@@ -4,6 +4,7 @@ import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 
 // type Value = CalendarProps["value"];
+type Value = CalendarProps["value"];
 
 const StyledCalendar = styled(Calendar)`
   width: 100%;
