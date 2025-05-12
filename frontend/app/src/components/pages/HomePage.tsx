@@ -46,7 +46,7 @@ const HomePage: React.FC = () => {
           withCredentials: true,
           headers: { Accept: "application/json" }
         });
-        setUserName(detail);
+        setUserName(detail.name);
       } catch (err: any) {
         console.error(err.response?.data || err.message);
         setError(err.message);
