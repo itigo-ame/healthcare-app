@@ -37,7 +37,7 @@ const ModalContent = styled.div`
 `;
 
 // カレンダーで扱う値の型（react-calendar 公式の型を利用）
-type Value = CalendarProps["value"];
+// type Value = CalendarProps["value"];
 
 // 各日付に対する入力値の型
 type Entry = {

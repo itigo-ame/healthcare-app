@@ -156,8 +156,6 @@ class CookieUserInfoView(APIView):
                 signing_key=settings.SECRET_KEY  # または settings.SIMPLE_JWT['SIGNING_KEY'] があればそちらを使用
             )
             token_data = token_backend.decode(access_token, verify=True)
-            # token_backend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
-            # token_data = token_backend.decode(access_token, verify=True)
         except Exception as e:
             return Response({"error": "Invalid token", "details": str(e)},
                             status=status.HTTP_401_UNAUTHORIZED)
