@@ -69,9 +69,13 @@ const HomePage: React.FC = () => {
         </LeftContainer>
 
         {/* 右側（コンテンツ追加予定） */}
-        <RightContainer></RightContainer>
 
-        <Dashboard /> 
+        <RightContainer>
+          <Dashboard /> 
+        </RightContainer>
+
+
+
       </HomeContainer>
     </>
   );
