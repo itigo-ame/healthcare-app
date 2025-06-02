@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useGraphData } from "../../hooks/useGraphData";
 import StatisticCard from "../molecules/StatisticCard";
+import HealthDataDisplay from "../../logic/HealthDataDisplay";
 
 
 const DashboardContainer = styled.div`
