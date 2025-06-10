@@ -40,7 +40,26 @@ class RegisterView(APIView):
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated]
 
+    def partial_update(self, request, *args, **kwargs):
+        response = super().partial_update(request, *args, **kwargs)
+
+        # パスワード・メール更新後に新トークン発行
+        user = self.get_object()
+        refresh = RefreshToken.for_user(user)
+        access  = refresh.access_token
+
+        res = Response(response.data, status=status.HTTP_200_OK)
+        res.set_cookie(
+            "access", str(access),
+            httponly=True, samesite="None", secure=False,
+        )
+        res.set_cookie(
+            "refresh", str(refresh),
+            httponly=True, samesite="None", secure=False,
+        )
+        return res
 # JWT トークン発行ビュー
 class CustomTokenObtainPairView(BaseTokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
@@ -92,6 +111,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
     lookup_field = "user_id"
+    lookup_url_kwarg = "user_id"      # URL <int:user_id> と対応させる
 
 # 体重履歴ビューセット
 class WeightRecordViewSet(viewsets.ModelViewSet):

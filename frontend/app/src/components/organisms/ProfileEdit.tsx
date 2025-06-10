@@ -37,6 +37,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({ user_id, email: initialEmail 
   // 補助
   const [loading, setLoading]   = useState(true);
   const [error, setError]       = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
     useEffect(() => {
     const fetchProfile = async () => {
@@ -61,21 +62,23 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({ user_id, email: initialEmail 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();             // フォーム再読み込み防止
     setError(null);
-    
-    try {
-      const customUser = { email, ...(password && { password }) };
-      await axios.patch(
-        `http://localhost:8000/api/users/${user_id}/`,
-        customUser,
-        { withCredentials: true }
-      )
+    setSuccess(null);
 
+    try {
       const userprofile = { nickname, height, goal };
       await axios.patch(
         `http://localhost:8000/api/user-profiles/${user_id}/`,
         userprofile,
         { withCredentials: true }
       );
+
+      const customUser = { email, ...(password && { password }) };
+      await axios.patch(
+        `http://localhost:8000/api/users/${user_id}/`,
+        customUser,
+        { withCredentials: true }
+      )
+      setSuccess("プロフィールを更新しました 🎉");
     }catch (err) {
       console.error("プロフィール更新失敗:", err);
       setError("更新に失敗しました");
